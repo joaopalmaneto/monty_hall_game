@@ -6,6 +6,10 @@ function revelar(elemento, opcao){
     return elemento !== opcao; 
 }
 
+function trocarPorta(elemento, revelada, anterior){
+    return elemento !== revelada && elemento !== anterior;
+}
+
 function escolher(opcao){
     
     const portas = sortearPortas();
@@ -22,18 +26,26 @@ function escolher(opcao){
     const trocar = prompt(`Monty: Você escolheu a porta ${opcao}. 
                            Há um cabrito atrás da porta ${revelada}.
                            \nDeseja trocar ou manter sua escolha?
-                           [1] para trocar, [0] para manter`);
+                           Digite [1] para trocar, [0] para manter`);
 
-   /*if(trocar == 0){
-        if(portas.carro == opcao){
-            alert("boa");
-        } else {
-            alert("perdeu"); 
-        }
-        
-    } 
-    else{
-    } */
+    switch(trocar){
+        case 0:
+            if(portas.carro == opcao){
+                alert("boa");
+            } else {
+                alert("perdeu"); 
+            }
+            break;
+            
+        case 1:
+            opcao = [1,2,3].filter(trocarPorta.bind(this, revelada, opcao))
+            if(portas.carro == opcao){
+                alert("boa");
+            } else {
+                alert("perdeu"); 
+            }
+    }
+
         
 }
 
