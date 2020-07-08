@@ -2,13 +2,15 @@ function iniciar(){
     window.location.href="jogo.html"
 }
 
-function revelar(elemento, opcao){
+// por algum motivo o parametro que recebe o elemento da função filter deve ser posicionado por último
+function revelar(opcao, elemento){
     return elemento !== opcao; 
 }
 
-function trocarPorta(elemento, revelada, anterior){
+function trocarPorta(revelada, anterior,  elemento){
     return elemento !== revelada && elemento !== anterior;
 }
+//
 
 function escolher(opcao){
     
@@ -22,28 +24,30 @@ function escolher(opcao){
     }
     console.log(revelada);
 
-    alert()
     const trocar = prompt(`Monty: Você escolheu a porta ${opcao}. 
                            Há um cabrito atrás da porta ${revelada}.
                            \nDeseja trocar ou manter sua escolha?
-                           Digite [1] para trocar, [0] para manter`);
+                           Digite 1 para trocar ou 0 para manter`);
 
-    switch(trocar){
+    switch(parseInt(trocar)){
         case 0:
-            if(portas.carro == opcao){
+         
+            if(portas.carro === opcao){
                 alert("boa");
             } else {
                 alert("perdeu"); 
-            }
+            } 
             break;
             
         case 1:
-            opcao = [1,2,3].filter(trocarPorta.bind(this, revelada, opcao))
-            if(portas.carro == opcao){
+            opcao = [1,2,3].filter(trocarPorta.bind(this, revelada, opcao))[0];
+       
+            if(portas.carro === opcao){
                 alert("boa");
             } else {
                 alert("perdeu"); 
-            }
+            } 
+            break;
     }
 
         
@@ -62,5 +66,5 @@ function sortearPortas(){
         cabritos: portas.splice(0, 2)
     }
 
-    return {carro: sorteadas.carro, cabritos: sorteadas.cabritos}
+    return {carro: sorteadas.carro[0], cabritos: sorteadas.cabritos}
 }
